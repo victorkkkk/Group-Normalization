@@ -203,7 +203,7 @@ while True:
         running_loss += loss.item()
         
         scheduler.step()
-        if total_step % 100 == 99:    # print every 2000 mini-batches
+        if total_step % 100 == 99:    # test accuracy every 100 steps
             net.eval()
             if not os.path.exists('./save_model'):
                 os.mkdir('./save_model')
@@ -216,7 +216,7 @@ while True:
 
             correct = 0
             total = 0
-            for _, (images_acc, labels_acc) in enumerate(dataloader):
+            for _, (images_acc, labels_acc) in enumerate(dataloader):    # train accuracy
 
                 images_acc, labels_acc = Variable(images_acc.cuda()), labels_acc.cuda()
                 labels_acc = labels_acc.view(labels_acc.size(0))
@@ -236,7 +236,7 @@ while True:
 
             correct = 0
             total = 0
-            for _, (images_acc, labels_acc) in enumerate(dataloader_test):
+            for _, (images_acc, labels_acc) in enumerate(dataloader_test):      # val accuracy
                 images_acc, labels_acc = Variable(images_acc.cuda()), labels_acc.cuda()
                 labels_acc = labels_acc.view(labels_acc.size(0))
 
